@@ -60,6 +60,14 @@ export const theme = createTheme({
         fontSize: "1.25rem",
       },
     },
+    h3: {
+      fontSize: "1.25rem",
+      fontWeight: 600,
+      lineHeight: 1.3,
+      "@media (max-width:900px)": {
+        fontSize: "1rem",
+      },
+    },
     body1: {
       fontSize: "1rem",
       "@media (max-width:900px)": {
