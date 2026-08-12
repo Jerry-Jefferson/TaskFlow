@@ -37,9 +37,9 @@ export const theme = createTheme({
     },
     divider: "#e5e7eb",
     taskPriority: {
-      low: "#EF1818",
+      low: "#09B977",
       medium: "#F59704",
-      high: "#09B977",
+      high: "#EF1818",
     },
   },
   typography: {
@@ -48,17 +48,29 @@ export const theme = createTheme({
       fontSize: "2.5rem",
       fontWeight: 700,
       lineHeight: 1.2,
+      "@media (max-width:900px)": {
+        fontSize: "1.5rem",
+      },
     },
     h2: {
       fontSize: "2rem",
       fontWeight: 700,
       lineHeight: 1.2,
+      "@media (max-width:900px)": {
+        fontSize: "1.25rem",
+      },
     },
     body1: {
       fontSize: "1rem",
+      "@media (max-width:900px)": {
+        fontSize: "0.8rem",
+      },
     },
     body2: {
       fontSize: "0.875rem",
+      "@media (max-width:900px)": {
+        fontSize: "0.75rem",
+      },
     },
   },
 });
