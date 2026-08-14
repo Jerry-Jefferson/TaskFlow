@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useSearchParams } from "react-router";
 import { useTasks } from "../../hooks/useTasks";
 import { TaskCard } from "../taskCard/taskCard";
@@ -10,6 +9,7 @@ import { TaskForm } from "../taskForm/taskForm";
 import AddIcon from "@mui/icons-material/Add";
 import { useTaskActions } from "../../hooks/useTaskActions";
 import { DeleteConfirmDialog } from "../../../../shared/components/deleteConfirmDialog/deleteConfirmDialog";
+import { filterTasks } from "../../model/filterTasks";
 
 const centeredBoxSx: SxProps<Theme> = {
   display: "flex",
@@ -36,6 +36,7 @@ export function TaskList() {
   const { isLoading, error: tasksError, refetch, data } = useTasks();
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("search") ?? "";
+  const statusFilter = searchParams.get("status");
   const {
     selectedTask,
     isOpen,
@@ -54,17 +55,7 @@ export function TaskList() {
     isCreating,
   } = useTaskActions();
 
-  const filteredTasks = useMemo(() => {
-    if (!data) return [];
-    if (!searchQuery) return data;
-
-    const query = searchQuery.toLowerCase();
-    return data.filter(
-      (task) =>
-        task.title.toLowerCase().includes(query) ||
-        task.description.toLowerCase().includes(query)
-    );
-  }, [data, searchQuery]);
+  const filteredTasks = filterTasks(data ?? [], searchQuery, statusFilter);
 
   if (isLoading) {
     return <TaskListSkeleton />;
