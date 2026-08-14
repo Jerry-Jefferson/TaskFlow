@@ -1,8 +1,10 @@
+import { useMemo } from "react";
+import { useSearchParams } from "react-router";
 import { useTasks } from "../../hooks/useTasks";
 import { TaskCard } from "../taskCard/taskCard";
 import { FeedbackCard } from "../../../../shared/components/feedbackCard/feedbackCard";
 import { TaskListSkeleton } from "../tasksPage/taskListSkeleton";
-import { Box, Button, type SxProps, type Theme } from "@mui/material";
+import { Box, Button, Typography, type SxProps, type Theme } from "@mui/material";
 import { ModalWindow } from "../../../../shared/components/modalWindow/modalWindow";
 import { TaskForm } from "../taskForm/taskForm";
 import AddIcon from "@mui/icons-material/Add";
@@ -32,6 +34,8 @@ function NewTaskButton({ onClick }: { onClick: () => void }) {
 
 export function TaskList() {
   const { isLoading, error: tasksError, refetch, data } = useTasks();
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("search") ?? "";
   const {
     selectedTask,
     isOpen,
@@ -49,6 +53,18 @@ export function TaskList() {
     isEditing,
     isCreating,
   } = useTaskActions();
+
+  const filteredTasks = useMemo(() => {
+    if (!data) return [];
+    if (!searchQuery) return data;
+
+    const query = searchQuery.toLowerCase();
+    return data.filter(
+      (task) =>
+        task.title.toLowerCase().includes(query) ||
+        task.description.toLowerCase().includes(query)
+    );
+  }, [data, searchQuery]);
 
   if (isLoading) {
     return <TaskListSkeleton />;
@@ -83,18 +99,24 @@ export function TaskList() {
         </Box>
       ) : (
         <>
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", lg: "1fr 1fr 1fr" },
-              gap: 2,
-              mt: 3,
-            }}
-          >
-            {data?.map((task) => (
-              <TaskCard key={task.id} task={task} onEdit={openEdit} onDelete={openDelete} />
-            ))}
-          </Box>
+          {filteredTasks.length ? (
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", lg: "1fr 1fr 1fr" },
+                gap: 2,
+                mt: 3,
+              }}
+            >
+              {filteredTasks.map((task) => (
+                <TaskCard key={task.id} task={task} onEdit={openEdit} onDelete={openDelete} />
+              ))}
+            </Box>
+          ) : (
+            <Typography variant="h3" sx={{ color: "primary.main", mt: 3 }}>
+              No tasks match your search
+            </Typography>
+          )}
           <NewTaskButton onClick={openCreate} />
         </>
       )}
