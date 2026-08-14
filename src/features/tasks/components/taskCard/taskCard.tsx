@@ -3,12 +3,15 @@ import type { Task } from "../../model/taskSchema";
 import { TaskPriority } from "./taskPriority";
 import { TaskActions } from "./taskActions";
 import { TaskStatusChip } from "./taskStatusChip";
+import { formatDate } from "../../../../shared/utils/formatDate";
 
 export type TaskCardProps = {
   task: Task;
+  onEdit: (task: Task) => void;
+  onDelete: (task: Task) => void;
 };
 
-export function TaskCard({ task }: TaskCardProps) {
+export function TaskCard({ task, onEdit, onDelete }: TaskCardProps) {
   return (
     <Box
       sx={{
@@ -51,9 +54,9 @@ export function TaskCard({ task }: TaskCardProps) {
         }}
       >
         <TaskPriority priority={task.priority} />
-        <Typography sx={{ color: "text.secondary" }}>{task.createdAt}</Typography>
+        <Typography sx={{ color: "text.secondary" }}>{formatDate(task.createdAt)}</Typography>
       </Box>
-      <TaskActions />
+      <TaskActions onEdit={() => onEdit(task)} onDelete={() => onDelete(task)} />
     </Box>
   );
 }

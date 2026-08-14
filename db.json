@@ -1,3 +1,21 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "title": "One more",
+      "description": "for fun",
+      "status": "in_progress",
+      "priority": "medium",
+      "createdAt": "2026-08-14T09:43:59.542Z",
+      "id": "iMpVp11-4vI"
+    },
+    {
+      "title": "Check if it's pending",
+      "description": "flkdmbdlkbmdlf",
+      "status": "todo",
+      "priority": "low",
+      "createdAt": "2026-08-14T12:07:18.948Z",
+      "id": "9clStdtmMQY"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

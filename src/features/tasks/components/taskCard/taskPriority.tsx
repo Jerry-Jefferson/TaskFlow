@@ -1,14 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import type { TaskPriority } from "../../model/taskSchema";
+import { priorityMap } from "../../model/taskPriority";
 
 export type TaskPriorityProps = {
   priority: TaskPriority;
-};
-
-const labels: Record<TaskPriority, string> = {
-  low: "Low",
-  medium: "Medium",
-  high: "High",
 };
 
 export function TaskPriority({ priority }: TaskPriorityProps) {
@@ -24,7 +19,7 @@ export function TaskPriority({ priority }: TaskPriorityProps) {
         })}
       />
       <Typography variant="body2" sx={{ color: "text.main", fontWeight: 500 }}>
-        {labels[priority]}
+        {priorityMap[priority]}
       </Typography>
     </Box>
   );

@@ -1,6 +1,11 @@
 import { Box, Button } from "@mui/material";
 
-export function TaskActions() {
+export type TaskActionsProps = {
+  onEdit: () => void;
+  onDelete: () => void;
+};
+
+export function TaskActions({ onEdit, onDelete }: TaskActionsProps) {
   return (
     <Box
       sx={{
@@ -11,10 +16,10 @@ export function TaskActions() {
         width: "100%",
       }}
     >
-      <Button fullWidth variant="contained">
+      <Button fullWidth variant="contained" onClick={onEdit}>
         Edit
       </Button>
-      <Button fullWidth variant="outlined">
+      <Button fullWidth variant="outlined" color="error" onClick={onDelete}>
         Delete
       </Button>
     </Box>
