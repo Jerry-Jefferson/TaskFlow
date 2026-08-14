@@ -23,13 +23,13 @@ export function HomePage() {
       <Box
         sx={{
           width: { xs: "100%", md: "20%" },
-          height: { xs: "auto", md: "100vh" },
+          alignSelf: { md: "stretch" },
           order: { xs: 2, md: 0 },
         }}
       >
         <Sidebar navLinks={navLinks} />
       </Box>
-      <Box sx={{ width: { xs: "100%", md: "80%" }, flex: 1, height: { xs: "auto", md: "100vh" } }}>
+      <Box sx={{ width: { xs: "100%", md: "80%" }, flex: 1, minHeight: { md: "100vh" } }}>
         <Outlet />
       </Box>
     </Box>
