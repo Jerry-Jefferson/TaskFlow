@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import { AppLink } from "../appLink/appLink";
 import { SidebarButton, type SidebarButtonProps } from "../sidebarButton/sidebarButton";
 import type { ElementType } from "react";
@@ -78,6 +78,7 @@ export function Sidebar({ navLinks, filterButtons, activeFilter, onFilterChange 
           p: 2,
         }}
       >
+        <Divider />
         {navLinks.map(({ label, link, icon: Icon }) => (
           <AppLink key={link} link={link}>
             <Icon fontSize="small" />

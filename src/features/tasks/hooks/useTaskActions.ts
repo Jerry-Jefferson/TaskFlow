@@ -71,6 +71,14 @@ export function useTaskActions() {
     [openModal]
   );
 
+  const openDetails = useCallback(
+    (task: Task) => {
+      setSelectedTask(task);
+      openModal("details");
+    },
+    [openModal]
+  );
+
   return {
     selectedTask,
     isOpen,
@@ -81,6 +89,7 @@ export function useTaskActions() {
     openCreate,
     openEdit,
     openDelete,
+    openDetails,
     createError: createMutation.error,
     isCreating: createMutation.isPending,
     editError: editMutation.error,
