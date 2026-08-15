@@ -1,0 +1,29 @@
+{
+  "tasks": [
+    {
+      "title": "Test task 1",
+      "description": "There is some text just to check how everything's working",
+      "status": "done",
+      "priority": "low",
+      "createdAt": "2026-08-14T12:47:03.762Z",
+      "id": "9SQLUjikBI0"
+    },
+    {
+      "title": "Test task 2",
+      "description": "A usability test task description is a short, realistic scenario that tells a user what goal to achieve on a website or app. It gives a clear reason to act without giving away the steps or answers",
+      "status": "in_progress",
+      "priority": "medium",
+      "createdAt": "2026-08-14T12:47:59.633Z",
+      "id": "Z_SAFayEr5k"
+    },
+    {
+      "title": "TestTask 3",
+      "description": "A very important task that is urgent with status to do",
+      "status": "done",
+      "priority": "high",
+      "createdAt": "2026-08-14T13:35:21.463Z",
+      "id": "JeC_MrcXqkk"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
