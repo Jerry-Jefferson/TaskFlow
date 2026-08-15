@@ -19,7 +19,7 @@
     {
       "title": "TestTask 3",
       "description": "A very important task that is urgent with status to do",
-      "status": "todo",
+      "status": "done",
       "priority": "high",
       "createdAt": "2026-08-14T13:35:21.463Z",
       "id": "JeC_MrcXqkk"

@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import type { Task } from "../../model/taskSchema";
+import type { Task, TaskStatus } from "../../model/taskSchema";
 import { TaskPriority } from "./taskPriority";
 import { TaskActions } from "./taskActions";
 import { TaskStatusChip } from "./taskStatusChip";
@@ -10,9 +10,10 @@ export type TaskCardProps = {
   onEdit: (task: Task) => void;
   onDelete: (task: Task) => void;
   onDetails: (task: Task) => void;
+  onStatusChange: (taskId: string, status: TaskStatus) => void;
 };
 
-export function TaskCard({ task, onEdit, onDelete, onDetails }: TaskCardProps) {
+export function TaskCard({ task, onEdit, onDelete, onDetails, onStatusChange }: TaskCardProps) {
   return (
     <Box
       sx={{
@@ -29,7 +30,10 @@ export function TaskCard({ task, onEdit, onDelete, onDetails }: TaskCardProps) {
         backgroundColor: "background.paper",
       }}
     >
-      <TaskStatusChip status={task.status} />
+      <TaskStatusChip
+        status={task.status}
+        onStatusChange={(status) => onStatusChange(task.id, status)}
+      />
       <Box onClick={() => onDetails(task)} sx={{ cursor: "pointer" }}>
         <Typography variant="h3">{task.title}</Typography>
         <Typography
