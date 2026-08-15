@@ -10,6 +10,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { useTaskActions } from "../../hooks/useTaskActions";
 import { DeleteConfirmDialog } from "../../../../shared/components/deleteConfirmDialog/deleteConfirmDialog";
 import { filterTasks } from "../../model/filterTasks";
+import { TaskDetails } from "../taskDetails/taskDetails";
 
 const centeredBoxSx: SxProps<Theme> = {
   display: "flex",
@@ -47,6 +48,7 @@ export function TaskList() {
     openCreate,
     openEdit,
     openDelete,
+    openDetails,
     createError,
     deleteError,
     editError,
@@ -100,7 +102,7 @@ export function TaskList() {
               }}
             >
               {filteredTasks.map((task) => (
-                <TaskCard key={task.id} task={task} onEdit={openEdit} onDelete={openDelete} />
+                <TaskCard key={task.id} task={task} onEdit={openEdit} onDelete={openDelete} onDetails={openDetails} />
               ))}
             </Box>
           ) : (
@@ -147,6 +149,11 @@ export function TaskList() {
             isPending={isEditing}
             acceptText="Save"
           />
+        </ModalWindow>
+      )}
+      {isOpen("details") && selectedTask && (
+        <ModalWindow header={`${selectedTask.title} details`} handleCancel={handleClose}>
+          <TaskDetails task={selectedTask} />
         </ModalWindow>
       )}
     </>
