@@ -11,6 +11,8 @@ import { useTaskActions } from "../../hooks/useTaskActions";
 import { DeleteConfirmDialog } from "../../../../shared/components/deleteConfirmDialog/deleteConfirmDialog";
 import { filterTasks } from "../../model/filterTasks";
 import { TaskDetails } from "../taskDetails/taskDetails";
+import { useUpdateTaskStatus } from "../../hooks/useUpdateTaskStatus";
+import type { TaskStatus } from "../../model/taskSchema";
 
 const centeredBoxSx: SxProps<Theme> = {
   display: "flex",
@@ -57,6 +59,11 @@ export function TaskList() {
     isCreating,
   } = useTaskActions();
 
+  const statusMutation = useUpdateTaskStatus();
+  const handleStatusChange = (taskId: string, status: TaskStatus) => {
+    statusMutation.mutate({ id: taskId, status });
+  };
+
   const filteredTasks = filterTasks(data ?? [], searchQuery, statusFilter);
 
   if (isLoading) {
@@ -102,7 +109,7 @@ export function TaskList() {
               }}
             >
               {filteredTasks.map((task) => (
-                <TaskCard key={task.id} task={task} onEdit={openEdit} onDelete={openDelete} onDetails={openDetails} />
+                <TaskCard key={task.id} task={task} onEdit={openEdit} onDelete={openDelete} onDetails={openDetails} onStatusChange={handleStatusChange} />
               ))}
             </Box>
           ) : (
